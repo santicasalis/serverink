@@ -11,7 +11,7 @@ const timeAvailabilityRouter = require("./timeAvailabilityRouter");
 const appointmentRouter = require("./appointmentRouter");
 // const loginRouter = require("./loginRouter");
 
-// const timeAvailabilityExceptionRouter = require("./timeAvailabilityExceptionRouter");
+const timeAvailabilityExceptionRouter = require("./timeAvailabilityExceptionRouter");
 // const adminRouter = require("./adminRouter");
 // const reviewRouter = require("./reviewRouter");
 
@@ -22,7 +22,7 @@ router.use("/publications", publicationRouter);
 router.use("/customers", customerRouter);
 router.use("/filters", filterRouter);
 router.use("/timeAvailabilities", timeAvailabilityRouter);
-// router.use("/timeAvailabilityExceptions", timeAvailabilityExceptionRouter);
+router.use("/timeAvailabilityExceptions", timeAvailabilityExceptionRouter);
 router.use("/appointments", appointmentRouter);
 // router.use("/auth", loginRouter);
 
