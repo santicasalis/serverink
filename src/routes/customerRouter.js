@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const customerRouter = Router();
 const createCustomerHandler = require("../handlers/CustomerHandlers/createCustomerHandler");
-const putCustomerHandler = require("../handlers/customerHandlers/updateCustomerHandler");
-const deleteCustomerHandler = require("../handlers/customerHandlers/deleteCustomerHandler");
-const getCustomersHandler = require("../handlers/customerHandlers/getCustomersHandler");
-const getCustomerByIdHandler = require("../handlers/customerHandlers/getCustomerByIdHandler");
+const putCustomerHandler = require("../handlers/CustomerHandlers/updateCustomerHandler");
+const deleteCustomerHandler = require("../handlers/CustomerHandlers/deleteCustomerHandler");
+const getCustomersHandler = require("../handlers/CustomerHandlers/getCustomersHandler");
+const getCustomerByIdHandler = require("../handlers/CustomerHandlers/getCustomerByIdHandler");
 
 customerRouter.get("/", getCustomersHandler);
 customerRouter.get("/:id", getCustomerByIdHandler);
