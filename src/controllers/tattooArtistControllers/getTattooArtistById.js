@@ -4,7 +4,7 @@ const {
   Publication,
   TimeAvailability,
   TimeAvailabilityException,
-  PriceRange
+  PriceRange,
 } = require("../../db");
 
 const getTattooArtistById = async (id) => {
@@ -46,7 +46,9 @@ const getTattooArtistById = async (id) => {
     tattooStyles: tattooArtist?.TattooStyles.map(
       (tattooStyle) => tattooStyle.name
     ),
-    publications: tattooArtist.Publications?.filter((publication) => !publication.disabled).map((publication) => {
+    publications: tattooArtist.Publications?.filter(
+      (publication) => !publication.disabled
+    ).map((publication) => {
       return {
         id: publication.id,
         description: publication.description,
@@ -73,16 +75,13 @@ const getTattooArtistById = async (id) => {
         };
       }
     ),
-    priceRanges: tattooArtist.PriceRanges?.map(
-      (priceRange) => {
-        return {
-          size: priceRange.size,
-          priceMin: priceRange.priceMin,
-          priceMax: priceRange.priceMax
-        }
-
-      }
-    )
+    priceRanges: tattooArtist.PriceRanges?.map((priceRange) => {
+      return {
+        size: priceRange.size,
+        priceMin: priceRange.priceMin,
+        priceMax: priceRange.priceMax,
+      };
+    }),
   };
 };
 
