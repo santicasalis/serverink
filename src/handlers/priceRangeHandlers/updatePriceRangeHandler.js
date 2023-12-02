@@ -8,7 +8,7 @@ const updatePriceRangeHandler = async (req, res) => {
       id,
       size,
       priceMin,
-      priceMax,
+      priceMax
     );
     res.status(200).json(updatedPriceRange);
   } catch (error) {
