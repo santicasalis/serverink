@@ -12,7 +12,7 @@ const appointmentRouter = require("./appointmentRouter");
 const loginRouter = require("./loginRouter"); //falta probar
 
 const timeAvailabilityExceptionRouter = require("./timeAvailabilityExceptionRouter"); //falta probar
-// const adminRouter = require("./adminRouter");
+const adminRouter = require("./adminRouter"); //falta probar
 const reviewRouter = require("./reviewRouter"); //falta probar
 
 router.use("/tattooStyles", tattoStyleRouter);
@@ -25,8 +25,7 @@ router.use("/timeAvailabilities", timeAvailabilityRouter);
 router.use("/timeAvailabilityExceptions", timeAvailabilityExceptionRouter);
 router.use("/appointments", appointmentRouter);
 router.use("/auth", loginRouter);
-
-// router.use("/admins", adminRouter);
+router.use("/admins", adminRouter);
 router.use("/reviews", reviewRouter);
 
 module.exports = router;
