@@ -6,12 +6,12 @@ const customerRouter = require("./customerRouter");
 const publicationRouter = require("./publicationRouter");
 // const PriceRangeRouter = require("./priceRangeRouter");
 const tattoStyleRouter = require("./tattooStyleRouter");
-const filterRouter = require("./filterRouter");
+const filterRouter = require("./filterRouter"); //falta probar
 const timeAvailabilityRouter = require("./timeAvailabilityRouter");
 const appointmentRouter = require("./appointmentRouter");
-// const loginRouter = require("./loginRouter");
+const loginRouter = require("./loginRouter"); //falta probar
 
-const timeAvailabilityExceptionRouter = require("./timeAvailabilityExceptionRouter");
+const timeAvailabilityExceptionRouter = require("./timeAvailabilityExceptionRouter"); //falta probar
 // const adminRouter = require("./adminRouter");
 // const reviewRouter = require("./reviewRouter");
 
@@ -24,7 +24,7 @@ router.use("/filters", filterRouter);
 router.use("/timeAvailabilities", timeAvailabilityRouter);
 router.use("/timeAvailabilityExceptions", timeAvailabilityExceptionRouter);
 router.use("/appointments", appointmentRouter);
-// router.use("/auth", loginRouter);
+router.use("/auth", loginRouter);
 
 // router.use("/admins", adminRouter);
 // router.use("/reviews", reviewRouter);
