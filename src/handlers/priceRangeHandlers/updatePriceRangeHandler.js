@@ -1,4 +1,4 @@
-const updatePriceRange = require("../../controllers/priceRangeControllers/updatePriceRange");
+const updatePriceRange = require("../../controllers/PriceRangeControllers/updatePriceRange");
 
 const updatePriceRangeHandler = async (req, res) => {
   const { id } = req.params;

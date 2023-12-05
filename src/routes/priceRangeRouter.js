@@ -1,14 +1,15 @@
 const { Router } = require("express");
-const getPriceRangeHandler = require("../handlers/priceRangeHandlers/getPriceRangeHandler");
+const getPriceRangeHandler =
+  require("../handlers/priceRangeHandlers/getPriceRangeHandler").default;
 const getPriceRangeByIdHandler = require("../handlers/priceRangeHandlers/getPriceRangeByIdHandler");
-const createPriceRangeHandler = require("../handlers/priceRangeHandlers/createPriceRangeHandler");
+const createPriceRangeHandler = require("../handlers/priceRangeHandlers/createPriceRangeHandler ");
 const updatePriceRangeHandler = require("../handlers/priceRangeHandlers/updatePriceRangeHandler");
 
-const priceRangeRouter = Router();
+const PriceRangeRouter = Router();
 
-priceRangeRouter.get("/", getPriceRangeHandler);
-priceRangeRouter.get("/:id", getPriceRangeByIdHandler);
-priceRangeRouter.post("/", createPriceRangeHandler);
-priceRangeRouter.put("/:id", updatePriceRangeHandler);
+PriceRangeRouter.get("/", getPriceRangeHandler);
+PriceRangeRouter.get("/:id", getPriceRangeByIdHandler);
+PriceRangeRouter.post("/", createPriceRangeHandler);
+PriceRangeRouter.put("/:id", updatePriceRangeHandler);
 
-module.exports = priceRangeRouter;
+module.exports = PriceRangeRouter;
