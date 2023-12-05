@@ -4,9 +4,14 @@ const updateTimeAvailability = async (id, day, initialHour, finalHour) => {
   const timeAvailabilityFound = await TimeAvailability.findByPk(id);
 
   if (timeAvailabilityFound) {
+    if (initialHour > finalHour) {
+      return {
+        code: 404,
+        error: "The initial hour must be less than the final hour",
+      };
+    }
     await TimeAvailability.update(
       {
-        day: day,
         initialHour: initialHour,
         finalHour: finalHour,
       },
@@ -14,7 +19,12 @@ const updateTimeAvailability = async (id, day, initialHour, finalHour) => {
         where: { id: id },
       }
     );
-    return "Time availability update sucessfully";
+    await TimeAvailability.findByPk(id);
+    return {
+      code: 201,
+      message: "Time availability update sucessfully",
+      data: timeAvailabilityFound,
+    };
   } else {
     return "Time availability not found";
   }
