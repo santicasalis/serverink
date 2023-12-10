@@ -1,4 +1,4 @@
-const createPriceRange = require("../../controllers/priceRangeControllers/createPriceRange");
+const createPriceRange = require("../../controllers/riceRangeControllers/createPriceRange");
 
 const createPriceRangeHandler = async (req, res) => {
   const { tattooArtistId, size, priceMin, priceMax } = req.body;
@@ -18,7 +18,7 @@ const createPriceRangeHandler = async (req, res) => {
       res.status(newPriceRange.code).json({ error: newPriceRange.error });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };
