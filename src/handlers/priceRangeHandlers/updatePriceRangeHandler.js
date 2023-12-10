@@ -1,4 +1,4 @@
-const updatePriceRange = require("../../controllers/priceRangeControllers/updatePriceRange");
+const updatePriceRange = require("../../controllers/PriceRangeControllers/updatePriceRange");
 
 const updatePriceRangeHandler = async (req, res) => {
   const { id } = req.params;
@@ -6,12 +6,10 @@ const updatePriceRangeHandler = async (req, res) => {
   try {
     const updatedPriceRange = await updatePriceRange(id, priceMin, priceMax);
     if (updatedPriceRange.code === 201) {
-      res
-        .status(201)
-        .json({
-          message: updatedPriceRange.message,
-          data: updatedPriceRange.data,
-        });
+      res.status(201).json({
+        message: updatedPriceRange.message,
+        data: updatedPriceRange.data,
+      });
     } else {
       res
         .status(updatedPriceRange.code)

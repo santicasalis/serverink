@@ -1,4 +1,4 @@
-const createPriceRange = require("../../controllers/riceRangeControllers/createPriceRange");
+const createPriceRange = require("../../controllers/PriceRangeControllers/createPriceRange");
 
 const createPriceRangeHandler = async (req, res) => {
   const { tattooArtistId, size, priceMin, priceMax } = req.body;
