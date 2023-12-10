@@ -10,7 +10,7 @@ const filterRouter = require("./filterRouter");
 const timeAvailabilityRouter = require("./timeAvailabilityRouter");
 const appointmentRouter = require("./appointmentRouter");
 const loginRouter = require("./loginRouter");
-
+const nodemailerRouter = require("./nodemailerRouter");
 const timeAvailabilityExceptionRouter = require("./timeAvailabilityExceptionRouter");
 const adminRouter = require("./adminRouter");
 const reviewRouter = require("./reviewRouter");
@@ -27,5 +27,6 @@ router.use("/appointments", appointmentRouter);
 router.use("/auth", loginRouter);
 router.use("/admins", adminRouter);
 router.use("/reviews", reviewRouter);
+router.use("/nodemailer", nodemailerRouter);
 
 module.exports = router;
