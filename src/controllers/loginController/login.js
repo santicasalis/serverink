@@ -1,32 +1,105 @@
-const { TattooArtist, TattooStyle, Publication, TimeAvailability, TimeAvailabilityException, PriceRange, Customer, Admin } = require("../../db");
+const {
+  TattooArtist,
+  TattooStyle,
+  Publication,
+  TimeAvailability,
+  TimeAvailabilityException,
+  PriceRange,
+  Customer,
+  Admin,
+  Appointment,
+  Review,
+} = require("../../db");
 
 const login = async (tokenId) => {
-  let user = {}
-  let cleanUser = {}
+  let user = {};
+  let cleanUser = {};
   user = await TattooArtist.findOne({
-    where: {tokenId}, 
+    where: { tokenId: tokenId },
     include: [
       { model: TattooStyle, attributes: ["name"] },
       {
         model: Publication,
-        attributes: ["description", "image", "createdAt", "updatedAt"],
+        attributes: [
+          "id",
+          "description",
+          "image",
+          "createdAt",
+          "updatedAt",
+          "disabled",
+        ],
+        required: false,
+        where: { disabled: false },
       },
       {
         model: TimeAvailability,
-        attributes: ["day", "initialHour", "finalHour"],
+        attributes: [
+          "id",
+          "day",
+          "initialHour",
+          "finalHour",
+          "secondInitialHour",
+          "secondFinalHour",
+        ],
+        required: false,
       },
       {
         model: TimeAvailabilityException,
-        attributes: ["date", "initialHour", "finalHour"],
+        attributes: [
+          "id",
+          "date",
+          "initialHour",
+          "finalHour",
+          "secondInitialHour",
+          "secondFinalHour",
+        ],
+        required: false,
       },
       {
         model: PriceRange,
-        attributes: ["size", "priceMin", "priceMax"]
-      }
-    ]
+        attributes: ["size", "priceMin", "priceMax", "id"],
+      },
+      {
+        model: Appointment,
+        as: "appointments",
+        foreignKey: "TattooArtist_Appointment",
+        attributes: [
+          "id",
+          "size",
+          "image",
+          "bodyPlace",
+          "description",
+          "dateAndTime",
+          "duration",
+          "depositPrice",
+          "paymentId",
+          "Customer_Appointment",
+        ],
+        where: { disabled: false },
+        required: false,
+      },
+      {
+        model: Review,
+        as: "reviews",
+        foreignKey: "TattooArtist_Review",
+        attributes: [
+          "id",
+          "comment",
+          "rating",
+          "Customer_Review",
+          "Appointment_Review",
+        ],
+        where: { disabled: false },
+        required: false,
+      },
+    ],
   });
 
-  if(user){
+  if (user.disabled) {
+    throw Error("Cuenta baneada");
+  }
+
+  if (user) {
     cleanUser = {
       id: user.id,
       fullName: user.fullName,
@@ -39,58 +112,159 @@ const login = async (tokenId) => {
       shopName: user.shopName,
       image: user.image,
       disabled: user.disabled,
-      tattooStyles: user.TattooStyles?.map(
-        (tattooStyle) => tattooStyle.name
-      ),
+      userType: user.userType,
+      tattooStyles: user.TattooStyles?.map((tattooStyle) => tattooStyle.name),
       publications: user.Publications?.map((publication) => {
         return {
+          id: publication.id,
           description: publication.description,
           image: publication.image,
           createdAt: publication.createdAt,
           updatedAt: publication.updatedAt,
+          disabled: publication.disabled,
         };
       }),
-      timeAvailabilities: user.TimeAvailabilities?.map(
-        (timeAvailability) => {
-          return {
-            day: timeAvailability.day,
-            initialHour: timeAvailability.initialHour,
-            finalHour: timeAvailability.finalHour,
-          };
-        }
-      ),
+      timeAvailabilities: user.TimeAvailabilities?.map((timeAvailability) => {
+        return {
+          id: timeAvailability.id,
+          day: timeAvailability.day,
+          initialHour: timeAvailability.initialHour,
+          finalHour: timeAvailability.finalHour,
+          secondInitialHour: timeAvailability.secondInitialHour,
+          secondFinalHour: timeAvailability.secondFinalHour,
+        };
+      }),
       timeAvailabilityExceptions: user.TimeAvailabilityExceptions?.map(
         (timeAvailabilityException) => {
           return {
             date: timeAvailabilityException.date,
             initialHour: timeAvailabilityException.initialHour,
             finalHour: timeAvailabilityException.finalHour,
+            secondInitialHour: timeAvailabilityException.secondInitialHour,
+            secondFinalHour: timeAvailabilityException.secondFinalHour,
           };
         }
       ),
-      priceRanges: user.PriceRanges?.map(
-        (priceRange) => {
+      priceRanges: user.PriceRanges?.map((priceRange) => {
+        return {
+          size: priceRange.size,
+          priceMin: priceRange.priceMin,
+          priceMax: priceRange.priceMax,
+          id: priceRange.id,
+        };
+      }),
+      appointments: user.appointments?.map((appointment) => {
+        return {
+          id: appointment.id,
+          size: appointment.size,
+          image: appointment.image,
+          bodyPlace: appointment.bodyPlace,
+          description: appointment.description,
+          dateAndTime: appointment.dateAndTime,
+          duration: appointment.duration,
+          depositPrice: appointment.depositPrice,
+          paymentId: appointment.paymentId,
+          CustomerId: appointment.Customer_Appointment,
+        };
+      }),
+      reviews: user.reviews?.map((review) => {
+        return {
+          comment: review.comment,
+          image: review.image,
+          rating: review.rating,
+          customerId: review.Customer_Review,
+          appointmentId: review.Appointment_Review,
+        };
+      }),
+    };
+  }
+
+  if (!user) {
+    let userCustomer = await Customer.findOne({
+      where: { tokenId: tokenId, disabled: false },
+      include: [
+        {
+          model: Appointment,
+          as: "appointments",
+          foreignKey: "Customer_Appointment",
+          attributes: [
+            "id",
+            "size",
+            "image",
+            "bodyPlace",
+            "description",
+            "dateAndTime",
+            "duration",
+            "depositPrice",
+            "paymentId",
+            "TattooArtist_Appointment",
+          ],
+          where: { disabled: false },
+          required: false,
+        },
+        {
+          model: Review,
+          as: "reviews",
+          foreignKey: "Customer_Review",
+          attributes: [
+            "id",
+            "comment",
+            "rating",
+            "TattooArtist_Review",
+            "Appointment_Review",
+          ],
+          where: { disabled: false },
+          required: false,
+        },
+      ],
+    });
+
+    if (userCustomer) {
+      cleanUser = {
+        id: userCustomer.id,
+        fullName: userCustomer.fullName,
+        email: userCustomer.email,
+        phone: userCustomer.phone,
+        image: userCustomer.image,
+        disabled: userCustomer.disabled,
+        userType: userCustomer.userType,
+        appointments: userCustomer.appointments?.map((appointment) => {
           return {
-            size: priceRange.size,
-            priceMin: priceRange.priceMin,
-            priceMax: priceRange.priceMax
-          }
-  
-        }
-      )
+            id: appointment.id,
+            size: appointment.size,
+            image: appointment.image,
+            bodyPlace: appointment.bodyPlace,
+            description: appointment.description,
+            dateAndTime: appointment.dateAndTime,
+            duration: appointment.duration,
+            depositPrice: appointment.depositPrice,
+            paymentId: appointment.paymentId,
+            tattooArtistId: appointment.TattooArtist_Appointment,
+          };
+        }),
+        reviews: userCustomer.reviews?.map((review) => {
+          return {
+            comment: review.comment,
+            image: review.image,
+            rating: review.rating,
+            tattooArtistId: review.TattooArtist_Review,
+            appointmentId: review.Appointment_Review,
+          };
+        }),
+      };
     }
-  }
-
-  if(!user){
-    cleanUser = await Customer.findOne({
-      where: {tokenId},
-    })
-  }
-
-  if(!cleanUser){
-    cleanUser = await Admin.findOne({
-      where: {tokenId}
-    })
+    if (!userCustomer) {
+      let userAdmin = await Admin.findOne({ where: { tokenId: tokenId } });
+      if (userAdmin) {
+        cleanUser = {
+          id: userAdmin.id,
+          userType: userAdmin.userType,
+          disabled: userAdmin.disabled,
+          fullName: userAdmin.fullName,
+          email: userAdmin.email,
+        };
+      }
+    }
   }
 
   return cleanUser;
