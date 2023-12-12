@@ -24,7 +24,7 @@ const receiveWebhookHandler = async (req, res) => {
       if (updatePaymentResult.code === 200) {
         return res
           .status(200)
-          .redirect("http://localhost:3000/user-dashboard/reservas");
+          .redirect("https://connectink.vercel.app/user-dashboard/reservas");
       } else {
         return res
           .status(updatePaymentResult.code)
