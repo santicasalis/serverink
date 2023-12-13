@@ -1,19 +1,19 @@
-const { Customer } = require('../../db')
+const { Customer } = require("../../db");
 
 const deleteCustomer = async (id) => {
-    const customerFound = await Customer.findByPk(id)
+  const customerFound = await Customer.findByPk(id);
 
-    if (customerFound) {
-        await Customer.update(
-            {
-                disabled: true
-            },
-            {
-                where: { id: id }
-            }
-        )
-        return 'Customer deleted successfully'
-    } 
-}
+  if (customerFound) {
+    await Customer.update(
+      {
+        disabled: !customerFound.disabled,
+      },
+      {
+        where: { id: id },
+      }
+    );
+    return "update successfully";
+  }
+};
 
-module.exports = deleteCustomer
+module.exports = deleteCustomer;
