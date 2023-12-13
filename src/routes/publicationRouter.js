@@ -6,11 +6,13 @@ const getPublicationByIdHandler = require("../handlers/publicationHandlers/getPu
 const createPublicationHandler = require("../handlers/publicationHandlers/createPublicationHandler");
 const updatePublicationHandler = require("../handlers/publicationHandlers/updatePublicationHandler");
 const deletePublicationHandler = require("../handlers/publicationHandlers/deletePublicationHandler");
+const getPublicationsByArtistIdHandler = require("../handlers/publicationHandlers/getPublicationsByArtistIdHandler");
 
 publicationRouter.get("/", getPublicationHandler);
 publicationRouter.get("/:id", getPublicationByIdHandler);
 publicationRouter.post("/", createPublicationHandler);
 publicationRouter.put("/:id", updatePublicationHandler);
 publicationRouter.delete("/:id", deletePublicationHandler);
+publicationRouter.post("/tattooArtistId", getPublicationsByArtistIdHandler);
 
 module.exports = publicationRouter;
