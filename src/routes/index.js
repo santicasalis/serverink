@@ -15,7 +15,9 @@ const timeAvailabilityExceptionRouter = require("./timeAvailabilityExceptionRout
 const adminRouter = require("./adminRouter");
 const reviewRouter = require("./reviewRouter");
 const mercadoPagoRouter = require("./mercadoPagoRouter");
+const customerRouterDisabled = require("./customerDisabledRouter");
 
+router.use("/customerDisabled", customerRouterDisabled);
 router.use("/tattooStyles", tattoStyleRouter);
 router.use("/tattooArtists", tattooArtistsRouter);
 router.use("/priceRange", priceRangeRouter);
