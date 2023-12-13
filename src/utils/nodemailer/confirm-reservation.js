@@ -21,7 +21,7 @@ const confirmReservation = (name, date) => {
     </div>
     <div style="text-align: center;margin-top: 3em">
         <a href="https://connectink.vercel.app/">
-     <img src="./logoconec.png" alt="ConnectInk" style="width: 15rem; height: auto;"></a></div> 
+     <img src="https://i.postimg.cc/qRx1pYf3/logoconec.png" alt="ConnectInk" style="width: 15rem; height: auto;"></a></div> 
     </div>
     `;
 };
