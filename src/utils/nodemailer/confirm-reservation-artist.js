@@ -18,7 +18,7 @@ const confirmReservationArtist = (name, date) => {
   
   <h3 style="font-family: 'Rock Salt'">¡Tienes una nueva Reserva de Turno!</h3>
    <h5 style="font-family: 'Rock Salt'">Es el dia reserva de turno con ${name} el ${date}.</h5>
-  <br><br>
+  <br>
   <p style="font-size: 1.1em;font-weight: bold;"> Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en ponerte en contacto con nosotros a través de connectinkproject@gmail.com.</p>
   <div style="text-align: center;margin-top: 3em">
       <button style="background-color: #20C6DA; color: #FFFFFF ;font-family: 'Rock Salt'; padding: 10px 20px; border: none; text-decoration: none; font-size: 16px; transition: background-color 0.3s">

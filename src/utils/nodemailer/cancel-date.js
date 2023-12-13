@@ -12,10 +12,10 @@ const cancelArtist = (name, date, price) => {
 
     <h3 style="font-family: 'Rock Salt' ;color:red">Tu reserva fue cancelada  </h3>
      <p style=" font-size: 1.1em ;font-weight:bold">Tu turno con ${name}  del día  ${date} fue cancelado.</p>
-     <br>
+ 
     <br>
     <p style=" font-size: 1.1em;font-weight: bold; " >Ante cualquier duda comunicarse a connectinkproject@gmail.com</p>
-    <br>
+
     <br>
     <p>Atentamente,</p>
     <p>ConnectInk</p>
