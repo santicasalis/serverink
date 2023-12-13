@@ -10,6 +10,7 @@ const {
   Appointment,
   Review,
 } = require("../../db");
+const { Op } = require("sequelize");
 
 const login = async (tokenId) => {
   let user = {};
@@ -73,9 +74,16 @@ const login = async (tokenId) => {
           "duration",
           "depositPrice",
           "paymentId",
+          "paymentStatus",
           "Customer_Appointment",
         ],
-        where: { disabled: false },
+        where: {
+          disabled: false,
+          [Op.or]: [
+            { paymentStatus: "approved" },
+            { paymentStatus: "in_process" },
+          ],
+        },
         required: false,
       },
       {
@@ -95,11 +103,10 @@ const login = async (tokenId) => {
     ],
   });
 
-  if (user.disabled) {
-    throw Error("Cuenta baneada");
-  }
-
   if (user) {
+    if (user.disabled) {
+      throw Error("Cuenta baneada");
+    }
     cleanUser = {
       id: user.id,
       fullName: user.fullName,
@@ -137,6 +144,7 @@ const login = async (tokenId) => {
       timeAvailabilityExceptions: user.TimeAvailabilityExceptions?.map(
         (timeAvailabilityException) => {
           return {
+            id: timeAvailabilityException.id,
             date: timeAvailabilityException.date,
             initialHour: timeAvailabilityException.initialHour,
             finalHour: timeAvailabilityException.finalHour,
@@ -164,6 +172,7 @@ const login = async (tokenId) => {
           duration: appointment.duration,
           depositPrice: appointment.depositPrice,
           paymentId: appointment.paymentId,
+          paymentStatus: appointment.paymentStatus,
           CustomerId: appointment.Customer_Appointment,
         };
       }),
@@ -198,8 +207,15 @@ const login = async (tokenId) => {
             "depositPrice",
             "paymentId",
             "TattooArtist_Appointment",
+            "paymentStatus",
           ],
-          where: { disabled: false },
+          where: {
+            disabled: false,
+            [Op.or]: [
+              { paymentStatus: "approved" },
+              { paymentStatus: "in_process" },
+            ],
+          },
           required: false,
         },
         {
@@ -220,6 +236,9 @@ const login = async (tokenId) => {
     });
 
     if (userCustomer) {
+      if (userCustomer.disabled) {
+        throw Error("Cuenta baneada");
+      }
       cleanUser = {
         id: userCustomer.id,
         fullName: userCustomer.fullName,
@@ -240,6 +259,7 @@ const login = async (tokenId) => {
             depositPrice: appointment.depositPrice,
             paymentId: appointment.paymentId,
             tattooArtistId: appointment.TattooArtist_Appointment,
+            paymentStatus: appointment.paymentStatus,
           };
         }),
         reviews: userCustomer.reviews?.map((review) => {
