@@ -39,5 +39,21 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    depositPrice: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    paymentId: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    paymentStatus: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    disabled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
 };
