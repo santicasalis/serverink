@@ -9,7 +9,7 @@ const resultPaymentHandler = async (req, res) => {
     if (result.code === 200) {
       return res
         .status(200)
-        .redirect("https://connectink.vercel.app/user-dashboard/reservas");
+        .redirect(`http://localhost:3000/user-dashboard/payments/${id}`);
     } else {
       return res.status(result.code).json({ error: result.error });
     }
