@@ -10,6 +10,7 @@ const client = new MercadoPagoConfig({
 const payment = new Payment(client);
 
 const receiveWebhookHandler = async (req, res) => {
+  console.log(" mkcfn fkcñ");
   const paymentQuery = req.query;
   try {
     if (paymentQuery.type === "payment") {
@@ -24,7 +25,9 @@ const receiveWebhookHandler = async (req, res) => {
       if (updatePaymentResult.code === 200) {
         return res
           .status(200)
-          .redirect("https://connectink.vercel.app/user-dashboard/reservas");
+          .redirect(
+            `https://connectink.vercel.app/user-dashboard/payments/${id}`
+          );
       } else {
         return res
           .status(updatePaymentResult.code)
