@@ -1,11 +1,11 @@
-const restoreAccount = require("../../controllers/nodemailer/restoreAccount")
+const restoreAccount = require("../../controllers/nodemailer/restoreAccount");
 
 const restoreAccountHandler = async (req, res) => {
-    const {email} = req.body
+  const { email } = req.body;
 
-    await restoreAccount(email)
+  await restoreAccount(email);
 
-    return res.status(200).send("email enviado")
-}
+  return res.status(200).send("email enviado");
+};
 
-module.exports = restoreAccountHandler
+module.exports = restoreAccountHandler;
