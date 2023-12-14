@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Customer, Appointment, Review } = require("../../db");
 
 const getCustomerById = async (id) => {
