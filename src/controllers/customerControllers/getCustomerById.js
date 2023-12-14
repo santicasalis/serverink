@@ -18,8 +18,15 @@ const getCustomerById = async (id) => {
           "depositPrice",
           "paymentId",
           "TattooArtist_Appointment",
+          "paymentStatus",
         ],
-        where: { disabled: false },
+        where: {
+          disabled: false,
+          [Op.or]: [
+            { paymentStatus: "approved" },
+            { paymentStatus: "in_process" },
+          ],
+        },
         required: false,
       },
       {
@@ -58,6 +65,7 @@ const getCustomerById = async (id) => {
         depositPrice: appointment.depositPrice,
         paymentId: appointment.paymentId,
         tattooArtistId: appointment.TattooArtist_Appointment,
+        paymentStatus: appointment.paymentStatus,
       };
     }),
     reviews: customer.reviews?.map((review) => {
