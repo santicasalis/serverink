@@ -214,6 +214,7 @@ const login = async (tokenId) => {
             [Op.or]: [
               { paymentStatus: "approved" },
               { paymentStatus: "in_process" },
+              { paymentStatus: "rejected" },
             ],
           },
           required: false,
