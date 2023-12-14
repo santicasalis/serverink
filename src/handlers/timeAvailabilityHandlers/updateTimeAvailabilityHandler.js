@@ -2,17 +2,18 @@ const updateTimeAvailability = require("../../controllers/timeAvailabilityContro
 
 const updateTimeAvailabilityHandler = async (req, res) => {
   const { id } = req.params;
-  const { initialHour, finalHour, secondInitialHour, secondFinalHour } =
-    req.body;
+  const { initialHour, finalHour, secondInitialHour, secondFinalHour } = req.body;
 
   try {
-    const updatedTimeAvailability = await updateTimeAvailability({
-      id,
-      initialHour,
-      finalHour,
-      secondInitialHour,
-      secondFinalHour,
-    });
+    const updatedTimeAvailability = await updateTimeAvailability(
+      {
+        id,
+        initialHour,
+        finalHour,
+        secondInitialHour,
+        secondFinalHour
+      }
+    );
     if (updatedTimeAvailability.code === 201) {
       res.status(201).json({
         message: updatedTimeAvailability.message,

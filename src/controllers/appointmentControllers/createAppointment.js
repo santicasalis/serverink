@@ -127,7 +127,7 @@ const createAppointment = async ({
     finalHour = possibleException.finalHour;
     secondInitialHour = possibleException.secondInitialHour;
     secondFinalHour = possibleException.secondFinalHour;
-    console.log(initialHour, finalHour, secondFinalHour, secondInitialHour);
+    console.log(initialHour, finalHour, secondFinalHour, secondInitialHour)
   }
 
   //comparar las horas

@@ -2,11 +2,11 @@ const { Router } = require("express");
 const publicationRouter = Router();
 
 const getPublicationHandler = require("../handlers/publicationHandlers/getPublicationsHandler");
+const getPublicationsByArtistIdHandler = require("../handlers/publicationHandlers/getPublicationsByArtistIdHandler")
 const getPublicationByIdHandler = require("../handlers/publicationHandlers/getPublicationByIdHandler");
 const createPublicationHandler = require("../handlers/publicationHandlers/createPublicationHandler");
 const updatePublicationHandler = require("../handlers/publicationHandlers/updatePublicationHandler");
 const deletePublicationHandler = require("../handlers/publicationHandlers/deletePublicationHandler");
-const getPublicationsByArtistIdHandler = require("../handlers/publicationHandlers/getPublicationsByArtistIdHandler");
 
 publicationRouter.get("/", getPublicationHandler);
 publicationRouter.get("/:id", getPublicationByIdHandler);
