@@ -12,12 +12,12 @@ module.exports = (sequelize) => {
       },
       size: {
         type: DataTypes.ENUM(
-          "pequeño",
-          "pequeño a color",
-          "mediano",
-          "mediano a color",
-          "grande",
-          "grande a color"
+          "Pequeño",
+          "Pequeño a color",
+          "Mediano",
+          "Mediano a color",
+          "Grande",
+          "Grande a color"
         ),
         allowNull: false,
       },

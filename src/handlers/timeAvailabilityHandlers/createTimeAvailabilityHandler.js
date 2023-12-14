@@ -1,23 +1,16 @@
 const createTimeAvailability = require("../../controllers/timeAvailabilityControllers/createTimeAvailability");
 
 const createTimeAvailabilityHandler = async (req, res) => {
-  const {
-    tattooArtistId,
-    day,
-    initialHour,
-    finalHour,
-    secondInitialHour,
-    secondFinalHour,
-  } = req.body;
+  const { tattooArtistId, day, initialHour, finalHour, secondInitialHour, secondFinalHour } = req.body;
   try {
-    const timeAvailability = await createTimeAvailability({
-      tattooArtistId,
+    const timeAvailability = await createTimeAvailability(
+      {tattooArtistId,
       day,
       initialHour,
       finalHour,
       secondInitialHour,
-      secondFinalHour,
-    });
+      secondFinalHour}
+    );
     if (timeAvailability.code === 201) {
       res.status(201).json({
         message: timeAvailability.message,

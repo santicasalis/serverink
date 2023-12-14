@@ -1,9 +1,9 @@
-const { Review } = require("../../db");
+const {Review} = require("../../db")
 
-async function getReviews() {
-  const reviews = Review.findAll({ where: { disabled: false } });
+async function getReviews(){
+    const reviews = Review.findAll({ where: { disabled: false } })
 
-  return reviews;
+    return reviews
 }
 
-module.exports = getReviews;
+module.exports = getReviews

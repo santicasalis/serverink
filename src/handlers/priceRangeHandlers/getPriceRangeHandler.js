@@ -1,4 +1,4 @@
-const getPriceRange = require("../../controllers/PriceRangeControllers/getPriceRange");
+const getPriceRange = require("../../controllers/priceRangeControllers/getPriceRange");
 
 const getPriceRangeHandler = async (req, res) => {
   try {
