@@ -44,7 +44,7 @@ const {
   TattooStyle,
   TimeAvailability,
   TimeAvailabilityException,
-  //Comment,
+  Comment,
 } = sequelize.models;
 
 // Appointment relation
@@ -93,26 +93,23 @@ Review.belongsTo(Appointment, {
   foreignKey: "Appointment_Review",
   as: "appointment",
 });
+Publication.hasMany(Comment, {
+  foreignKey: "Publication_Comment",
+  as: "comments",
+});
+Comment.belongsTo(Publication, {
+  foreignKey: "Publication_Comment",
+  as: "publication",
+});
 
-// comment relation
-// Publication.hasMany(Comment, {
-//   foreignKey: "Publication_Comment",
-//   as: "comments",
-// });
-// Comment.belongsTo(Publication, {
-//   foreignKey: "Publication_Comment",
-//   as: "publication",
-// });
-
-// Customer.hasMany(Comment, {
-//   foreignKey: "Customer_Comment",
-//   as: "comments",
-// });
-// Comment.belongsTo(Customer, {
-//   foreignKey: "Customer_Comment",
-//   as: "customer",
-// });
-
+Customer.hasMany(Comment, {
+  foreignKey: "Customer_Comment",
+  as: "comments",
+});
+Comment.belongsTo(Customer, {
+  foreignKey: "Customer_Comment",
+  as: "customer",
+});
 // TattooArtist - TattooStyles relation:
 TattooArtist.belongsToMany(TattooStyle, {
   through: "ArtistStyle",
