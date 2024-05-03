@@ -132,7 +132,6 @@ TimeAvailability.belongsTo(TattooArtist);
 TattooArtist.hasMany(TimeAvailabilityException);
 TimeAvailabilityException.belongsTo(TattooArtist);
 
-// TattooArtist - PriceRange relation:
 TattooArtist.hasMany(PriceRange);
 PriceRange.belongsTo(TattooArtist);
 
